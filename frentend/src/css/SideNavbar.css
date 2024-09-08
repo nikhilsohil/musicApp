@@ -1,0 +1,42 @@
+.side-navbar {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    background-color: #f8f9fa;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.side-navbar .list-group-item {
+    border: none;
+}
+
+.side-navbar .list-group-item.active-item {
+    background-color: #ffffff;
+    color: #000;
+    font-weight: bold;
+    border-left: 5px solid #007bff;
+}
+
+.side-navbar .list-group-item.inactive-item {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.side-navbar .list-group-item:hover {
+    background-color: #e9ecef;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .side-navbar {
+        width: 250px;
+        transform: translateX(-250px);
+    }
+
+    .side-navbar.active {
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+
+
+* {
+  box-sizing: border-box !important;
+  margin: 0;
+  padding: 0;
+
+}
+
+.dark {
+  color: white;
+  background-color: #121212
+}
+
+img {
+  border-radius: 4px;
+}
+
+.search-form {
+  display: inline-flex;
+  align-items: center;
+}
+
+.search-input-group {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.search-input-group:hover {
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}
+
+.search-input-group input {
+  /* border: none;
+    outline: none; */
+  cursor: pointer;
+}
+
+.search-input-group:focus-within .input-group-text {
+  border-color: #007bff;
+  /* Change this to your desired border color */
+}
+
+x
+
+/* Ensure the input itself also has the same border color on focus */
+.search-input-group .form-control:focus {
+  box-shadow: none;
+  /* Remove default Bootstrap shadow if needed */
+  /* border-color: #007bff; */
+  /* Same border color as InputGroup.Text */
+}
+
+
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.play-button {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.image-container:hover .play-button {
+  opacity: 1;
+}
+
+.image-container:hover img {
+  filter: brightness(70%);
+}
+
+
+
+
+
+
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  border-radius: 10px;
+  /* background: transparent; */
+  outline: none;
+}
+
+/* The track (background) */
+input[type="range"]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 15px;
+  /* background: linear-gradient(to right, #4CAF50, #4CAF50) no-repeat, #ddd; */
+  border-radius: 7.5px;
+  overflow: hidden;
+}
+
+input[type="range"]::-moz-range-track {
+  width: 100%;
+  height: 15px;
+  /* background: #ddd; */
+  border-radius: 7.5px;
+}
+
+/* Thumb styling (make it invisible) */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 0;
+  height: 0;
+}
+
+
+.scroll {
+  scrollbar-width: none;
+}
+
+
+.offcanvas-custom {
+  width: 350px;
+  height: 85% !important;
+  right: 0 !important;
+  top: 40% !important;
+  transform: translateY(-50%) !important;
+  position: absolute;
+}
+
+/* src/App.css */
+
+@media (min-width: 768px) {
+  .controler-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999; /* Ensure it is above other elements */
+  }
+}
+
+@media (max-width: 767.98px) {
+  .controler-fixed {
+    position: static; /* Reset position for small devices */
+  }
+}
+
+
+
+
+.animation {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  align-content: flex-end;
+  width: 100%;
+  height: 50%;
+  cursor: pointer;
+
+  span {
+    width: 3px;
+    align-self: center;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    animation: bounce 1.5s ease infinite alternate;
+    content: '';
+  }
+
+  span {
+    &:nth-of-type(2) {
+      animation-delay: -2.2s;
+      /* Start at the end of animation */
+    }
+
+    &:nth-of-type(3) {
+      animation-delay: -3.7s;
+      /* Start mid-way of return of animation */
+    }
+  }
+}
+
+@keyframes bounce {
+  10% {
+    transform: scaleY(0.3);
+    /* start by scaling to 30% */
+  }
+
+  30% {
+    transform: scaleY(1);
+    /* scale up to 100% */
+  }
+
+  60% {
+    transform: scaleY(0.5);
+    /* scale down to 50% */
+  }
+
+  80% {
+    transform: scaleY(0.75);
+    /* scale up to 75% */
+  }
+
+  100% {
+    transform: scaleY(0.6);
+    /* scale down to 60% */
+  }
+}
+
+
+
+
+.card:hover .hoverButton {
+  display: block;
+  z-index: 1000;
+  border: 0;
+}
+
+.card {
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.loaderCard:hover {
+  transform: scale(1);
+}
+
+.searchBar {
+  position: relative;
+  width: 75%;
+  transition: width .5s ease;
+}
+
+.searchResults {
+  background-color: white;
+  max-height: 0px;
+  /* width: 0; */
+  opacity: 0;
+  overflow: hidden;
+  transition: width .5s ease, max-height 1.5s ease, opacity .5s ease;
+}
+
+.searchResults.active {
+  max-height: max-content;
+
+  z-index: 100;
+  opacity: 1;
+}
+
+.bg-main {
+  background-image: url(../public/images/pexels-photo-167092.webp), linear-gradient(rgba(0, 0, 0, 0.486), rgba(0, 0, 0, 0.491));
+  background-size: cover;
+  background-position: fixed;
+  height: 100vh;
+  width: 100vw;
+  color: white;
+}
+
+.blur {
+  background-color: rgba(255, 255, 255, 0.416);
+  backdrop-filter: blur(10px);
+}
+
+.no-focus-outline:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
+.vertical-menu {
+
+  width: 200px;
+  height: 250px;
+  position: absolute;
+  right: 0;
+  z-index: 11;
+  background-color: #eee;
+  overflow: auto;
+}
+
+
+.vertical-menu p,
+.vertical-menu a {
+  background-color: #eee;
+  color: black;
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  margin: 0;
+}
+
+.vertical-menu p:hover,
+.vertical-menu a:hover {
+  background-color: #ccc;
+}
+
+.vertical-menu a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+
+/* Hide columns by default */
+.hide-column {
+  display: none;
+}
+
+.tab-content {
+  padding: 0 !important;
+}
+/* Show columns when container is larger */
+@media (min-width: 500px) {
+  .show-column-small {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 800px) {
+  .show-column-medium {
+    display: table-cell;
+  }
+}
+
+@media (min-width: 1100px) {
+  .show-column-large {
+    display: table-cell;
+  }
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tooltip-inner{
+  display:flex;
+  flex-direction: column;
+  background: #e9ecef !important;
+}
+.tooltip-arrow::before{
+  display: none !important;
+}
