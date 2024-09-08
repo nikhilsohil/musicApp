@@ -8,6 +8,7 @@ import Alert from '../reuseable/components/Alert';
 import TrackRow from '../reuseable/components/TrackRow';
 import Loader from '../reuseable/components/Loader';
 import { FaPlus } from 'react-icons/fa';
+import { backend_Base_url } from '../constants';
 
 
 const Playlist = () => {
@@ -26,7 +27,7 @@ const Playlist = () => {
             try {
                 if (type === "custom") {
 
-                    const response = await axios.get(`http://localhost:5000/playlist/${playListId}`);
+                   const response = await axios.get(`${backend_Base_url}/playlist/${playListId}`);
                     console.log(response);
                     setPlaylist(response.data.data);
                 } else {
