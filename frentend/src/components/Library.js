@@ -11,6 +11,7 @@ import Loader from '../reuseable/components/Loader';
 import ArtistCard from '../reuseable/components/ArtistCard';
 import SongTable from '../reuseable/components/SongTable';
 import UpdateImage from '../reuseable/components/UpdateImage';
+import { backend_Base_url } from '../constants';
 
 function Library() {
     const dispatch = useDispatch();
@@ -57,7 +58,7 @@ function Library() {
         
         const fetchPlaylists = async () => {
             try {
-                const response = await axios.get('/playlist', {
+                 const response = await axios.get(`${backend_Base_url}/playlist`, {
                     params: {
                         userId: JSON.parse(localStorage.getItem('user'))._id
                     }
@@ -138,7 +139,6 @@ function Library() {
                             style={{ width: '400px', maxWidth: "10rem", cursor: 'pointer', transition: 'transform 0.3s ease-in-out' }}
                             className='w-100  shadow h-100'
                             roundedCircle
-                            // src='http://localhost:5000/images/user.jpg'
                             src={profileImage}
                             alt={user.name}
                             onClick={() => setShowModal(true)}
