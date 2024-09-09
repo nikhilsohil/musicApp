@@ -7,7 +7,6 @@ import { playerAction } from '../store/player';
 import Alert from '../reuseable/components/Alert';
 import TrackRow from '../reuseable/components/TrackRow';
 import Loader from '../reuseable/components/Loader';
-import { FaPlus } from 'react-icons/fa';
 import { MdDelete } from "react-icons/md";
 import { backend_Base_url } from '../constants';
 
@@ -54,7 +53,7 @@ const Playlist = () => {
 
     };
 
-    const deletePlaylist =async ()=>{
+    const deletePlaylist = async () => {
         try {
             const response = await axios.delete(`${backend_Base_url}/playlist/${playListId}`);
             console.log(response);
@@ -112,7 +111,7 @@ const Playlist = () => {
                                 className='w-25 rounded-pill me-3'>
                                 Play
                             </Button>
-                   
+
                             {/* </div> */}
                             {
                                 type === "custom" && <div className='w-25 mt-2 d-flex justify-content-around'>

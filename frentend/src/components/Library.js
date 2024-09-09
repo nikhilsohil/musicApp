@@ -58,7 +58,7 @@ function Library() {
         
         const fetchPlaylists = async () => {
             try {
-                const response = await axios.get(`${backend_Base_url}/playlist`, {
+                 const response = await axios.get(`${backend_Base_url}/playlist`, {
                     params: {
                         userId: JSON.parse(localStorage.getItem('user'))._id
                     }
@@ -91,12 +91,13 @@ function Library() {
         };
 
         if (likedSongs.length > 0) {
-
             fetchSongs();
+
         }
+        
+            // fetchSongs();
 
-
-    }, []);
+    }, [likedSongs]);
 
     useEffect(() => {
         const fetchArtists = async () => {
