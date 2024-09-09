@@ -8,6 +8,8 @@ import Alert from '../reuseable/components/Alert';
 import TrackRow from '../reuseable/components/TrackRow';
 import Loader from '../reuseable/components/Loader';
 import { FaPlus } from 'react-icons/fa';
+import { MdDelete } from "react-icons/md";
+import { backend_Base_url } from '../constants';
 
 
 const Playlist = () => {
@@ -19,14 +21,14 @@ const Playlist = () => {
     const [playlist, setPlaylist] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
     // Fetch playlist data from API
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
                 if (type === "custom") {
 
-                    const response = await axios.get(`http://localhost:5000/playlist/${playListId}`);
+                    const response = await axios.get(`${backend_Base_url}/playlist/${playListId}`);
                     console.log(response);
                     setPlaylist(response.data.data);
                 } else {
@@ -51,6 +53,19 @@ const Playlist = () => {
         dispatch(playerAction.play());
 
     };
+
+    const deletePlaylist =async ()=>{
+        try {
+            const response = await axios.delete(`${backend_Base_url}/playlist/${playListId}`);
+            console.log(response);
+            navigate('/library');
+        } catch (err) {
+            setError(true);
+            console.error('Failed to delete playlist:', err);
+        } finally {
+            setLoading(false);
+        }
+    }
 
 
     if (loading) {
@@ -91,22 +106,30 @@ const Playlist = () => {
                                 playlist.description &&
                                 <p>{playlist.description}</p>
                             }
-                            <div>
-                                <Button
-                                    onClick={handlePlaylistPlay}
-                                    className='w-25 rounded-pill me-3'>
-                                    Play
-                                </Button>
-                                {
-                                    type === "custom"&&
+                            {/* <div> */}
+                            <Button
+                                onClick={handlePlaylistPlay}
+                                className='w-25 rounded-pill me-3'>
+                                Play
+                            </Button>
+                   
+                            {/* </div> */}
+                            {
+                                type === "custom" && <div className='w-25 mt-2 d-flex justify-content-around'>
+                                    <Button
+                                        variant='outline-primary'
+                                        onClick={() => navigate("/")}
+                                        className='rounded-pill justify-content-center align-content-center'>
+                                        Add Song
+                                    </Button>
                                     <Button
                                         variant='outline-secondary'
-                                        onClick={() => navigate("/")}
+                                        onClick={deletePlaylist}
                                         className='rounded-circle justify-content-center align-content-center'>
-                                        <FaPlus className='h-100' />
+                                        <MdDelete className='h-100' />
                                     </Button>
-                                }
-                            </div>
+                                </div>
+                            }
                         </Col>
                     </Row>
                     <Row className='m-0 w-100'>

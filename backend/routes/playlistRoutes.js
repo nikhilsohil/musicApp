@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { createPlaylist, getAllPlaylists, getSinglePlaylist,addSong } from "../controllers/playlistController.js";
+import { createPlaylist, getAllPlaylists, getSinglePlaylist,deletePlaylist,addSong } from "../controllers/playlistController.js";
 
 const routes = Router();
 
@@ -12,6 +12,8 @@ routes.get('/:id',getSinglePlaylist);
 routes.post('/create',createPlaylist);
 
 routes.post('/:id/addsong',addSong);
+
+routes.delete('/:id',deletePlaylist);
 
 
 

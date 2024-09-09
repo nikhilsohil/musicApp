@@ -11,6 +11,7 @@ import Loader from '../reuseable/components/Loader';
 import ArtistCard from '../reuseable/components/ArtistCard';
 import SongTable from '../reuseable/components/SongTable';
 import UpdateImage from '../reuseable/components/UpdateImage';
+import { backend_Base_url } from '../constants';
 
 function Library() {
     const dispatch = useDispatch();
@@ -57,7 +58,7 @@ function Library() {
         
         const fetchPlaylists = async () => {
             try {
-                const response = await axios.get('/playlist', {
+                const response = await axios.get(`${backend_Base_url}/playlist`, {
                     params: {
                         userId: JSON.parse(localStorage.getItem('user'))._id
                     }
@@ -138,7 +139,6 @@ function Library() {
                             style={{ width: '400px', maxWidth: "10rem", cursor: 'pointer', transition: 'transform 0.3s ease-in-out' }}
                             className='w-100  shadow h-100'
                             roundedCircle
-                            // src='http://localhost:5000/images/user.jpg'
                             src={profileImage}
                             alt={user.name}
                             onClick={() => setShowModal(true)}
@@ -163,12 +163,12 @@ function Library() {
                     </Col>
                 </Row>
 
-                <Row className='p-0 m-0 w-100'>
-                    <Col xs={12} md={3} className="p-0 py-4 mb-4 h-100 flex-grow-1 scroll overflow-auto">
+                <Row className='p-0 m-0 w-100 '>
+                    <Col xs={12} md={3} className="p-0 py-2 mb-0 h-100 flex-grow-1 scroll overflow-auto">
                         <div className='d-flex d-md-block justify-content-around w-100'>
                             <p role='button'
                                 onClick={() => setActiveTab('playlists')}
-                                className={` p-2 mb-0 border  flex-grow-1 text-center ${activeTab === 'playlists' ? "bg-primary text-white rounded border-white" : "bg-white"}`}>
+                                className={` p-2 mb-0 border rounded  flex-grow-1 text-center ${activeTab === 'playlists' ? "bg-primary text-white rounded border-white" : "bg-white"}`}>
                                 Playlists
                             </p>
                             <p role='button'
@@ -183,11 +183,11 @@ function Library() {
                             </p>
                         </div>
                     </Col>
-                    <Col xs={12} md={9} className='py-4'>
+                    <Col xs={12} md={9} className='p-0 py-2 '>
                         {
                             activeTab === 'playlists' &&
-                            <Row >
-                                <Card role='button' style={{ width: '14vw', minWidth: "10rem", position: 'relative' }} onClick={() => setAddNewPlaylist(true)} className='p-0 m-3'>
+                            <Row className='justify-content-around'>
+                                <Card role='button' style={{ width: '14vw', minWidth: "10rem", position: 'relative' }} onClick={() => setAddNewPlaylist(true)} className='p-0 m-2'>
 
                                     <Button className='w-100 '>
                                         <FaPlus size="3rem" />
@@ -215,20 +215,20 @@ function Library() {
                         {
                             activeTab === 'likedSongs' &&
                             <Row>
-                                <Col className="my-3 ">
+                                {/* <Col className=" px-3 "> */}
                                     {likedSongError && <p className="text-danger">Error loading liked songs: {likedSongError}</p>}
                                     {likedSongsData.length > 0 ?
                                         <SongTable songs={likedSongsData} /> : (
 
                                             <Col xs={12}><h2>No liked songs yet.</h2></Col>
                                         )}
-                                </Col>
+                                {/* </Col> */}
                             </Row>
                         }
                         {
                             activeTab === 'likedArtists' &&
                             <Row>
-                                <Col className="my-3 ">
+                                {/* <Col className=" px-0 "> */}
                                     {artistError && <p className="text-danger">Error loading Artist songs: {likedSongError}</p>}
                                     {likedArtistData.length > 0 ?
                                         likedArtistData.map((artist, index) =>
@@ -236,7 +236,7 @@ function Library() {
 
                                             <Col xs={12}><h2>No liked songs yet.</h2></Col>
                                         )}
-                                </Col>
+                                {/* </Col> */}
                             </Row>
                         }
 

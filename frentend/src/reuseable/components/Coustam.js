@@ -38,7 +38,7 @@ const Coustam = ({ playlist }) => {
     return (
         // <Container fluid className='m-0  text-decoration-none  ' as={Link} to={`/playlist/`}>
             <Card style={{ width: '14vw', minWidth: "10rem", position: 'relative' }}
-                className='m-3 shadow text-decoration-none playlist-card dark p-0 m-1'
+                className='m-2 shadow text-decoration-none playlist-card dark p-0 m-1'
                 as={Link} to={`/playlist/custom/${playlist._id}`}
                 >
 

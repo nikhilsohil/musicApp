@@ -26,15 +26,15 @@ const playlistschema = new mongoose.Schema({
         default: [
             {
                 "quality": "50x50",
-                "url": "http://localhost:5000/images/default-playlist.png"
+                "url": "https://res.cloudinary.com/dzkwvfyei/image/upload/v1725823431/default-playlist_nkeolz.png"
             },
             {
                 "quality": "150x150",
-                "url": "http://localhost:5000/images/default-playlist.png"
+                "url": "https://res.cloudinary.com/dzkwvfyei/image/upload/v1725823431/default-playlist_nkeolz.png"
             },
             {
                 "quality": "500x500",
-                "url": "http://localhost:5000/images/default-playlist.png",
+                "url": "https://res.cloudinary.com/dzkwvfyei/image/upload/v1725823431/default-playlist_nkeolz.png",
             }
         ],
     }

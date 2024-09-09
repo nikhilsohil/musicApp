@@ -76,7 +76,7 @@ function SearchBar() {
             <Row className='rounded-top w-100 '>
                 {
                     !isFocused &&
-                    <Col md={2} className='h-100'>
+                    <Col md={2} className='d-none d-md-block h-100'>
                         <Link to='/' className='text-decoration-none text-black h-100'>
                             <Image src={logo} alt='Tunetream' className='w-100 ' />
                         </Link>

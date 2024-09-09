@@ -6,13 +6,15 @@ import user from '../models/userModel.js';
 
 const getAllPlaylists = async (req, res) => {
     try {
-        const { userId } = req. query;
-        if (!userId) return res.status(400).json({ status: false, message: 'User ID is required' });
+        const { userId } = req.query;
+        if (!userId) {
+            return res.status(400).json({ status: false, message: 'User ID is required' });
+        }
 
         const objectId = new mongoose.Types.ObjectId(userId);
         const playlists = await playlist.find({ createdBy: objectId });
         console.log(playlists);
-        
+
         if (playlists.length === 0) {
             return res.status(404).json({ status: false, message: 'No playlists found' });
         }
@@ -39,7 +41,7 @@ const getSinglePlaylist = async (req, res) => {
             return res.status(404).json({ status: false, message: 'Playlist not found' });
         }
 
-        return res.status(200).json({ status: true, data:getPlaylist });
+        return res.status(200).json({ status: true, data: getPlaylist });
 
     } catch (error) {
         console.error('Error fetching playlist:', error);
@@ -52,7 +54,7 @@ const getSinglePlaylist = async (req, res) => {
 
 const createPlaylist = async (req, res) => {
     try {
-        const {userId,name,song} = req.body
+        const { userId, name, song } = req.body
 
         if (!userId || !name) {
             return res.status(400).json({ status: false, message: 'User ID and playlist title are required' });
@@ -65,7 +67,7 @@ const createPlaylist = async (req, res) => {
         const newPlaylist = await new playlist({
             createdBy: userId,
             name,
-            songs:song?[song]:[],
+            songs: song ? [song] : [],
         }).save();
 
 
@@ -77,16 +79,16 @@ const createPlaylist = async (req, res) => {
     }
 };
 
-const addSong=async(req,res) => {
+const addSong = async (req, res) => {
     try {
         const playlistId = req.params.id;
         const song = req.body.song;
-        if (!playlistId ||!song) {
+        if (!playlistId || !song) {
             return res.status(400).json({ status: false, message: 'Playlist ID and song title are required' });
         }
         const playlistExists = await playlist.findByIdAndUpdate(playlistId, { $push: { songs: song } });
-        
-        
+
+
         if (!playlistExists) {
             return res.status(404).json({ status: false, message: 'Playlist not found' });
         }
@@ -122,6 +124,7 @@ export {
     getAllPlaylists,
     getSinglePlaylist,
     createPlaylist,
+    deletePlaylist,
     addSong,
 
 }; 
