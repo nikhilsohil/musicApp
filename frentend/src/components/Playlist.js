@@ -8,7 +8,7 @@ import Alert from '../reuseable/components/Alert';
 import TrackRow from '../reuseable/components/TrackRow';
 import Loader from '../reuseable/components/Loader';
 import { MdDelete } from "react-icons/md";
-import { backend_Base_url } from '../constants';
+import { backend_Base_url, song_api } from '../constants';
 
 
 const Playlist = () => {
@@ -31,7 +31,7 @@ const Playlist = () => {
                     console.log(response);
                     setPlaylist(response.data.data);
                 } else {
-                    const response = await axios.get(`https://saavn.dev/api/playlists?id=${playListId}`);
+                    const response = await axios.get(`${song_api}/playlists?id=${playListId}`);
                     setPlaylist(response.data.data);
                 }
             } catch (err) {

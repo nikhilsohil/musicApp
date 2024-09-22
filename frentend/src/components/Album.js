@@ -7,6 +7,7 @@ import { playerAction } from '../store/player';
 import TrackRow from '../reuseable/components/TrackRow';
 import Loader from '../reuseable/components/Loader';
 import ArtistCard from '../reuseable/components/ArtistCard';
+import { song_api } from '../constants';
 
 function Album() {
     const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function Album() {
     useEffect(() => {
         const getAlbum = async () => {
             try {
-                const response = await axios.get(`https://saavn.dev/api/albums?id=${albumId}`);
+                const response = await axios.get(`${song_api}/albums?id=${albumId}`);
                 setAlbum(response.data.data);
             } catch (err) {
                 setError(err.message);

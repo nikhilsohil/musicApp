@@ -6,6 +6,7 @@ import SongCard from '../reuseable/components/SongCard';
 import PlaylistCardLoader from '../reuseable/components/playlistCardLoader';
 import { playlists, topArtist, topSongs } from '../data/data';
 import axios from 'axios';
+import { song_api } from '../constants';
 
 
 function Home() {
@@ -23,7 +24,7 @@ function Home() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    playlists.map(id => axios.get(`https://saavn.dev/api/playlists?id=${id}`))
+                    playlists.map(id => axios.get(`${song_api}/playlists?id=${id}`))
                 );
                 const data = responses.map(response => response.data.data);
                 setPlaylistData(data);
@@ -39,7 +40,7 @@ function Home() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    topArtist.map(id => axios.get(`https://saavn.dev/api/artists/${id}`))
+                    topArtist.map(id => axios.get(`${song_api}/artists/${id}`))
                 );
                 const data = responses.map(response => response.data.data);
                 setTopArtistData(data);
@@ -55,7 +56,7 @@ function Home() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    topSongs.map(id => axios.get(`https://saavn.dev/api/songs/${id}`))
+                    topSongs.map(id => axios.get(`${song_api}/songs/${id}`))
                 );
                 const data = responses.map(response => response.data.data[0]);
                 setSongsData(data);

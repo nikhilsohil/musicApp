@@ -10,6 +10,7 @@ import ArtistCard from '../reuseable/components/ArtistCard';
 import Loader from '../reuseable/components/Loader';
 import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { likeArtist, unlikeArtist } from '../store/asyncAction';
+import { song_api } from '../constants';
 
 
 function Artist() {
@@ -27,7 +28,7 @@ function Artist() {
         const getArtist = async () => {
             try {
                 setLoading(true);
-                const response = await axios.get(`https://saavn.dev/api/artists/${artistId}`);
+                const response = await axios.get(`${song_api}/artists/${artistId}`);
            
 
                 setArtist(response.data.data);

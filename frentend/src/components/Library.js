@@ -11,7 +11,7 @@ import Loader from '../reuseable/components/Loader';
 import ArtistCard from '../reuseable/components/ArtistCard';
 import SongTable from '../reuseable/components/SongTable';
 import UpdateImage from '../reuseable/components/UpdateImage';
-import { backend_Base_url } from '../constants';
+import { backend_Base_url, song_api } from '../constants';
 
 function Library() {
     const dispatch = useDispatch();
@@ -80,7 +80,7 @@ function Library() {
         const fetchSongs = async () => {
             try {
                 const responses = await Promise.all(
-                    likedSongs.map(id => axios.get(`https://saavn.dev/api/songs/${id}`))
+                    likedSongs.map(id => axios.get(`${song_api}/songs/${id}`))
                 );
                 const data = responses.map(response => response.data.data[0]);
                 setLikedSongsData(data);
@@ -104,7 +104,7 @@ function Library() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    likedArtists.map(artistId => axios.get(`https://saavn.dev/api/artists/${artistId}`))
+                    likedArtists.map(artistId => axios.get(`${song_api}/artists/${artistId}`))
                 );
                 const data = responses.map(response => response.data.data);
                 setLikedArtistData(data);

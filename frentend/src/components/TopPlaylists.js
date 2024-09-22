@@ -4,6 +4,7 @@ import { playlists } from '../data/data';
 import PlaylistCardLoader from '../reuseable/components/playlistCardLoader';
 import PlayListCard from '../reuseable/components/PlayListCard';
 import axios from 'axios';
+import { song_api } from '../constants';
 
 
 function TopPlaylists() {
@@ -16,7 +17,7 @@ function TopPlaylists() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    playlists.map(id => axios.get(`https://saavn.dev/api/playlists?id=${id}`))
+                    playlists.map(id => axios.get(`${song_api}/playlists?id=${id}`))
                 );
                 const data = responses.map(response => response.data.data);
                 setPlaylistData(data);

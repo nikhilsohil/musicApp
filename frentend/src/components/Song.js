@@ -11,6 +11,7 @@ import { FaRegHeart, FaHeart } from 'react-icons/fa';
 import { likeSong, unlikeSong } from '../store/asyncAction';
 import { BsThreeDotsVertical } from "react-icons/bs";
 import SongTable from '../reuseable/components/SongTable';
+import { song_api } from '../constants';
 
 function Song() {
     const navigate = useNavigate();
@@ -29,13 +30,13 @@ function Song() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const songResponse = await axios.get(`https://saavn.dev/api/songs/${songId}`);
+                const songResponse = await axios.get(`${song_api}/songs/${songId}`);
                 setSong(songResponse.data.data[0]);
 
-                const albumResponse = await axios.get(`https://saavn.dev/api/albums?id=${songResponse.data.data[0].album.id}`);
+                const albumResponse = await axios.get(`${song_api}/albums?id=${songResponse.data.data[0].album.id}`);
                 setSongAlbum(albumResponse.data.data);
 
-                const suggestionsResponse = await axios.get(`https://saavn.dev/api/songs/${songId}/suggestions`);
+                const suggestionsResponse = await axios.get(`${song_api}/songs/${songId}/suggestions`);
                 setSuggestedSong(suggestionsResponse.data.data);
             } catch (err) {
                 setError(err.message);
