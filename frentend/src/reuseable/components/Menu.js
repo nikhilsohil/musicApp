@@ -8,6 +8,7 @@ import AddPlaylist from './AddPlaylist';
 import { likeSong, unlikeSong } from '../../store/asyncAction';
 import { FaRegHeart, FaHeart ,FaUser, FaPlus, FaMusic,FaRecordVinyl } from 'react-icons/fa';
 import { MdOutlinePlaylistAdd } from "react-icons/md";
+import { backend_Base_url } from '../../constants';
 
 
 
@@ -35,7 +36,7 @@ function Menu({ show, setShow, song }) {
         const fetchPlaylists = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`http://localhost:5000/playlist/`, {
+                const response = await axios.get(`${backend_Base_url}/playlist/`, {
                     params: {
                         userId: JSON.parse(localStorage.getItem('user'))._id
                     }
@@ -67,7 +68,7 @@ function Menu({ show, setShow, song }) {
 
     const addSongToPlaylist = async (playlist) => {
         try {
-            const response = await axios.post(`http://localhost:5000/playlist/${playlist._id}/addsong`, { song });
+            const response = await axios.post(`${backend_Base_url}/playlist/${playlist._id}/addsong`, { song });
             console.log('Song added to playlist successfully:', response.data);
             setAddToPlaylist(false);
             setShow(false);

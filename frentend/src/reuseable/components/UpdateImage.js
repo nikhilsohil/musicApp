@@ -53,6 +53,25 @@ function UpdateImage({ showModal, setShowModal }) {
     };
 
 
+    const handleImageRemove=async()=>{
+        try {
+            setLoading(true);
+            const response = await axios.delete(`${backend_Base_url}/users/removeprofilephoto`,{})
+            console.log(response);
+            localStorage.setItem('user', JSON.stringify(response.data ));
+            dispatch(playerAction.login(response.data.user))
+            setShowModal(false);
+
+        } catch (e) {
+            console.error(e);
+        
+        } finally {
+            setLoading(false);
+        }
+
+    }
+
+
     return (
         <>
             <style type="text/css">
@@ -130,7 +149,7 @@ function UpdateImage({ showModal, setShowModal }) {
                             </Button>
                         {/* </Col>
                         <Col sm={12} className="text-center"> */}
-                        <Button variant="outline-primary" type="submit" disabled={loading} >
+                        <Button variant="outline-primary" type="submit" disabled={loading} onClick={handleImageRemove} >
                             Remove
                             </Button>
                         </Col>

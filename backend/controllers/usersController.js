@@ -22,13 +22,15 @@ const getUser = async (req, res) => {
         if (!userDetails) {
             return res.status(404).json({ status: false, message: "User not found" });
         }
-        
-        res.status(200).json({ status: true, user:{
-            _id: userDetails._id,
-            name: userDetails.name,
-            email: userDetails.email,
-            profileURL: userDetails.profileURL
-        } });
+
+        res.status(200).json({
+            status: true, user: {
+                _id: userDetails._id,
+                name: userDetails.name,
+                email: userDetails.email,
+                profileURL: userDetails.profileURL
+            }
+        });
 
     } catch (error) {
         console.error(error);
@@ -79,7 +81,7 @@ const updateProfile = async (req, res) => {
 
 const uploadProfilePhoto = async (req, res) => {
     const { userId } = req.body;
-    
+
     console.log("Request body:", userId);
 
     // Check if userId exists
@@ -91,7 +93,7 @@ const uploadProfilePhoto = async (req, res) => {
         // Find the user by ID
         const userDetails = await User.findById(userId);
         console.log(userDetails);
-        
+
         if (!userDetails) {
             return res.status(404).json({ status: false, message: "User not found" });
         }
@@ -99,7 +101,7 @@ const uploadProfilePhoto = async (req, res) => {
         // Get the file from the request (assumes multer or similar middleware)
         const file = req.file?.path;
         console.log(req.file);
-        
+
         if (!file) {
             return res.status(400).json({ status: false, message: "No file uploaded" });
         }
@@ -134,11 +136,47 @@ const uploadProfilePhoto = async (req, res) => {
     }
 };
 
+const removeProfilePhoto = async (req, res) => {
+    const { userId } = req.body;
+    if (!userId) {
+        return res.status(400).json({ status: false, message: "userId is required" })
+    }
+    try {
+        const userDetails = await User.findById(userId);
+        console.log(userDetails);
+
+        if (!userDetails) {
+            return res.status(404).json({ status: false, message: "User not found" });
+        }
+
+        userDetails.profileURL = "https://res.cloudinary.com/dzkwvfyei/image/upload/v1725438026/user_iwaekd.jpg";
+        await userDetails.save();
+
+        return res.status(200).json({
+            status: true,
+            message: "Profile photo deleted successfully",
+            user: {
+                _id: userDetails._id,
+                name: userDetails.name,
+                email: userDetails.email,
+                profileURL: userDetails.profileURL,
+            },
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ status: false, message: "internal server error" });
+
+    }
+
+
+}
 
 
 export {
     getUser,
     changePassword,
     updateProfile,
-    uploadProfilePhoto
+    uploadProfilePhoto,
+    removeProfilePhoto,
 };

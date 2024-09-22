@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { playerAction } from '../../store/player';
 import axios from 'axios';
+import { song_api } from '../../constants';
 
 const ArtistCard = ({ artist }) => {
     const { isLogin } = useSelector(state => state.player)
@@ -19,7 +20,7 @@ const ArtistCard = ({ artist }) => {
         e.stopPropagation();
         const getArtistSongs = async () => {
             try {
-                const response = await axios.get(`https://saavn.dev/api/artists?id=${artist.id}`);
+                const response = await axios.get(`${song_api}/artists/${artist.id}`);
                 console.log(response);
 
 
