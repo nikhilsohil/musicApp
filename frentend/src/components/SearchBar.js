@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FaRegUserCircle } from "react-icons/fa";
 import { playerAction } from '../store/player';
 import logo from "../images/logo2.png";
+import { song_api } from '../constants';
 
 function SearchBar() {
     const [query, setQuery] = useState("");
@@ -35,7 +36,7 @@ function SearchBar() {
         setError(null);
 
         try {
-            const response = await axios.get(`https://saavn.dev/api/search?query=${query}`);
+            const response = await axios.get(`${song_api}/search?query=${query}`);
             setResults(response.data.data);
         } catch (error) {
             console.error('Error fetching data:', error);

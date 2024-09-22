@@ -7,6 +7,7 @@ import ArtistCard from '../reuseable/components/ArtistCard';
 import AlbumCard from '../reuseable/components/AlbumCard';
 import SongTable from '../reuseable/components/SongTable';
 import Loader from '../reuseable/components/Loader';
+import { song_api } from '../constants';
 
 function Search() {
     const { type, query } = useParams();
@@ -20,7 +21,7 @@ function Search() {
     async function getMoreResult() {
         setError(false);
         try {
-            const response = await axios.get(`https://saavn.dev/api/search/${type}?query=${query}&page=${page}&limit=10`);
+            const response = await axios.get(`${song_api}/search/${type}?query=${query}&page=${page}&limit=10`);
             const newResults = response.data.data.results;
             setResult(prevResults => [...prevResults, ...newResults]);
             if (newResults.length === 0 || newResults.length < 10) {
@@ -43,7 +44,7 @@ function Search() {
         const getResult = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`https://saavn.dev/api/search/${type}?query=${query}`);
+                const response = await axios.get(`${song_api}/search/${type}?query=${query}`);
                 const initialResults = response.data.data.results;
                 setResult(initialResults);
                 if (initialResults.length === 0 || initialResults.length < 10) {
