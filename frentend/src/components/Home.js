@@ -40,7 +40,7 @@ function Home() {
             try {
                 setLoading(true);
                 const responses = await Promise.all(
-                    topArtist.map(id => axios.get(`${song_api}/artists/${id}`))
+                    topArtist.map(id => axios.get(`${song_api}/artists?id=${id}`))
                 );
                 const data = responses.map(response => response.data.data);
                 setTopArtistData(data);
